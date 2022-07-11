@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <h1>{{ object|yesno:"Update,Create" }} a Task</h1>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input class="btn btn-primary" type="submit" value="Create">
+    </form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>To Do List</h1>
+        <a class="btn btn-primary" href="{% url 'tasks-create' %}">Add new task</a>
+    </div>
+    <p></p>
+    <table class="table">
+        <tr>
+        </tr>
+    {% for task in tasks %}
+        <tr>
+            <td><h5>{{ task.content }}
+                {% if task.status %}
+                    <strong style="color: green">Done</strong>
+                    {% else %} <strong style="color: red">Not done</strong>
+                {% endif %}
+                {% if task.status %}
+                    <a style="float: right" class="btn btn-secondary " href="{% url 'complete-button' pk=task.pk%}">Undo</a>
+                    {% else %}
+                    <a style="float: right" class="btn btn-primary " href="{% url 'complete-button' pk=task.pk%}">Complete</a>
+                {% endif %}
+
+                </h5>
+                <p>Created at: {{ task.datetime }}</p>
+                <p>
+                    {% if task.deadline %}
+                        Deadline: {{ task.deadline }}
+                    {% endif %}
+                </p>
+                <p> Tags:
+                    {% for tag in task.tags.all %}
+                        {{ tag }}
+                    {% endfor %}
+                </p>
+                <div>
+                    <p class="btn btn-primary"><a style="color: white" href="{% url 'tasks-update' pk=task.pk %}">Update task</a></p>
+                    <p class="btn btn-danger"><a style="color: black" href="{% url 'tasks-delete' pk=task.pk %}">Delete task</a></p>
+                </div>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

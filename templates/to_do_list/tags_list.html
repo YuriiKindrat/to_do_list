@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Tags</h1>
+        <a class="btn btn-primary" href="{% url 'tags-create' %}">Add tag</a>
+    </div>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    {% for tag in tags %}
+        <tr>
+            <td>{{ tag }}</td>
+            <td><a class="btn btn-success" href="{% url 'tags-update' pk=tag.id %}">Update</a></td>
+            <td><a class="btn btn-danger" href="{% url 'tags-delete' pk=tag.id %}">Delete</a></td>
+        </tr>
+
+        {% endfor %}
+    </table>
+{% endblock %}
